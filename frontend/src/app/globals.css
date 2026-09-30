@@ -1,0 +1,260 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --glass-border: rgb(255 255 255 / 0.78);
+  --glass-surface: rgb(255 255 255 / 0.68);
+  --ink: #172b3a;
+  --muted-ink: #607583;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 8% 4%, rgb(113 205 198 / 0.24), transparent 34rem),
+    radial-gradient(ellipse at 92% 18%, rgb(247 194 143 / 0.22), transparent 31rem),
+    linear-gradient(145deg, #eef6f5 0%, #f5f7f8 48%, #edf2f5 100%);
+  color: var(--ink);
+  font-family: "Aptos", "Segoe UI Variable", "Segoe UI", sans-serif;
+}
+
+::selection {
+  background: rgb(13 148 136 / 0.18);
+}
+
+.app-sidebar,
+.app-header {
+  background: rgb(255 255 255 / 0.56);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.app-sidebar {
+  border-color: rgb(255 255 255 / 0.72);
+  background: linear-gradient(
+    165deg,
+    rgb(215 239 234 / 0.9) 0%,
+    rgb(228 243 240 / 0.84) 54%,
+    rgb(242 242 231 / 0.88) 100%
+  );
+  box-shadow: 8px 0 28px rgb(33 73 72 / 0.06), inset -1px 0 0 rgb(255 255 255 / 0.38);
+}
+
+.app-header {
+  border-color: rgb(255 255 255 / 0.72);
+  box-shadow: 0 8px 24px rgb(36 63 76 / 0.04);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sidebar-mark {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 0.9);
+  border-radius: 0.75rem;
+  background: linear-gradient(145deg, #0f766e, #39a69a);
+  box-shadow: 0 6px 15px rgb(15 118 110 / 0.2);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.sidebar-link {
+  position: relative;
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.sidebar-link:hover {
+  transform: translateX(2px);
+}
+
+.sidebar-link.is-active::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #0f766e;
+  content: "";
+}
+
+.sidebar-link.is-active {
+  background: rgb(15 118 110 / 0.12);
+  box-shadow: inset 0 0 0 1px rgb(15 118 110 / 0.08);
+  color: #115e59;
+}
+
+.mobile-nav {
+  scrollbar-width: none;
+  mask-image: linear-gradient(to right, #000 92%, transparent);
+}
+
+.mobile-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-nav-link {
+  color: var(--muted-ink);
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.mobile-nav-link:hover {
+  color: var(--ink);
+  background: rgb(255 255 255 / 0.55);
+}
+
+.mobile-nav-link.is-active {
+  background: rgb(15 118 110 / 0.1);
+  color: #0f766e;
+}
+
+.bg-white {
+  background-color: var(--glass-surface);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.border-slate-200 {
+  border-color: var(--glass-border);
+}
+
+.dashboard-metrics {
+  animation: rise-in 560ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.dashboard-intro {
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-eyebrow,
+.metric-kicker {
+  color: var(--muted-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dashboard-intro > div {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.dashboard-intro h1 {
+  color: var(--ink);
+  font-size: 1.8rem;
+  font-weight: 650;
+}
+
+.dashboard-metric {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--glass-border);
+  background: var(--glass-surface);
+  box-shadow: 0 10px 30px rgb(36 63 76 / 0.06), inset 0 1px 0 rgb(255 255 255 / 0.8);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.dashboard-metric::after {
+  position: absolute;
+  top: -2.5rem;
+  right: -2rem;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  background: var(--metric-glow, rgb(13 148 136 / 0.1));
+  content: "";
+  filter: blur(1px);
+  transition: transform 350ms ease;
+}
+
+.dashboard-metric--items {
+  --metric-glow: rgb(13 148 136 / 0.14);
+}
+
+.dashboard-metric--warehouses {
+  --metric-glow: rgb(226 145 73 / 0.15);
+}
+
+.dashboard-metric--stock {
+  --metric-glow: rgb(83 143 190 / 0.15);
+}
+
+.dashboard-metric--low-stock {
+  --metric-glow: rgb(208 101 82 / 0.13);
+}
+
+.dashboard-metric:hover::after {
+  transform: scale(1.25);
+}
+
+.dashboard-metric:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.dashboard-metric:nth-child(3) {
+  animation-delay: 140ms;
+}
+
+.dashboard-metric:nth-child(4) {
+  animation-delay: 210ms;
+}
+
+.metric-kicker,
+.metric-link,
+.dashboard-metric p {
+  position: relative;
+  z-index: 1;
+}
+
+.metric-arrow {
+  transition: transform 180ms ease;
+}
+
+.dashboard-metric:hover .metric-arrow {
+  transform: translateX(3px);
+}
+
+.dashboard-metric:hover {
+  transform: translateY(-3px);
+  border-color: rgb(13 148 136 / 0.36);
+  box-shadow: 0 16px 34px rgb(36 63 76 / 0.11), inset 0 1px 0 rgb(255 255 255 / 0.9);
+}
+
+button,
+nav a {
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
